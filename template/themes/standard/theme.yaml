@@ -1,0 +1,3 @@
+theme_name: "Standard Theme"<link rel="stylesheet" type="text/css" href="styles/style.css" />
+theme_index: "index.html"
+theme_page: "page.html"
