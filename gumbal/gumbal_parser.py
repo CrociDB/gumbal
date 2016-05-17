@@ -8,7 +8,7 @@ class GumbalParser:
 		gumbal_info.print_header()
 
 		if len(args) < 2:
-			gumbal_info.print_message("Ops, you forgot to tell me what you want...")
+			gumbal_info.print_error("Ops, you forgot to tell me what you want...")
 			return;
 
 		command = args[1]
@@ -18,7 +18,7 @@ class GumbalParser:
 		elif command == "build":
 			self.build()
 		else:
-			gumbal_info.print_message("Ops, command *%s* is unknown. Sorry." % command)
+			gumbal_info.print_error("Ops, command *%s* is unknown. Sorry." % command)
 
 	def status(self):
 		site = self.load_site()
@@ -37,6 +37,6 @@ class GumbalParser:
 			gumbal_info.print_message("Current site loaded: %s" % gumbal_site.site_name)
 			gumbal_info.print_message(" ~ Using theme: %s" % gumbal_site.site_theme.theme_name)
 		except Exception:
-			gumbal_info.print_message("Ops, that doesn't look like a real site.")
+			gumbal_info.print_error("Ops, that doesn't look like a real site.")
 
 		return gumbal_site

@@ -1,3 +1,5 @@
+import sys
+
 GUMBAL_VERSION = 0.01
 
 GUMBAL_HEADER = """ Gumbal v{0} - Static Website Generator
@@ -11,3 +13,10 @@ def get_header():
 
 def print_message(message):
 	print " %s" % message
+
+def print_error(message):
+	print " [ERR] %s" % message
+
+def terminate(message):
+	print_error(message)
+	sys.exit()

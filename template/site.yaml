@@ -1,2 +1,4 @@
 site_name: "Template Site"
 site_theme: "standard"
+site_home: index.md
+site_pages: pages
