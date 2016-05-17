@@ -9,6 +9,7 @@ class GumbalParser:
 
 		if len(args) < 2:
 			gumbal_info.print_message("Ops, you forgot to tell me what you want...")
+			return;
 
 		command = args[1]
 

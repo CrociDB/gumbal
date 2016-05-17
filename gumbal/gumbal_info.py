@@ -1,6 +1,6 @@
 GUMBAL_VERSION = 0.01
 
-GUMBAL_HEADER = """ Gumbal v{0} - Static Website Generator 
+GUMBAL_HEADER = """ Gumbal v{0} - Static Website Generator
 """
 
 def print_header():
