@@ -31,14 +31,14 @@ class GumbalSite:
 			shutil.rmtree(self.site_build_dir)
 
 		gumbal_info.print_message("\n")
-		gumbal_info.print_message(" ~> Creating directory %s" % self.site_build_dir)
+		gumbal_info.print_message(" ~> Creating directory: \n\t%s" % self.site_build_dir)
 		os.makedirs(self.site_build_dir)
 
 		self._parse_index()
 
 	def _parse_index(self):
 		file_dir = "%s/index.html" % self.site_build_dir
-		gumbal_info.print_message(" ~> Creating Index file: %s" % file_dir)
+		gumbal_info.print_message(" ~> Creating Index file: \n\t%s" % file_dir)
 
 		index_contents = self.site_theme.get_index()
 		index_replaced = self._parse_constant_value(index_contents, GumbalThemeConstants.SITE_TITLE, self.site_name)

@@ -2,7 +2,15 @@ import sys
 
 GUMBAL_VERSION = 0.01
 
-GUMBAL_HEADER = """ Gumbal v{0} - Static Website Generator
+GUMBAL_HEADER = """
+   ___  __  __  __  __  ____    __    __
+  / __)(  )(  )(  \/  )(  _ \  /__\  (  )
+ ( (_-. )(__)(  )    (  ) _ < /(__)\  )(__    v{0} - Static Website Generator
+  \___/(______)(_/\/\_)(____/(__)(__)(____)
+
+ ============================================================================
+                                     http://https://github.com/CrociDB/gumbal
+
 """
 
 def print_header():
