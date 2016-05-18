@@ -9,7 +9,7 @@ GUMBAL_HEADER = """
   \___/(______)(_/\/\_)(____/(__)(__)(____)
 
  ============================================================================
-                                     http://https://github.com/CrociDB/gumbal
+                                            https://github.com/CrociDB/gumbal
 
 """
 
