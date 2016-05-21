@@ -34,18 +34,24 @@ class GumbalSite:
 
 		self.pages = []
 
+		index_page = join(self.site_root_path, self.site_home)
+		self.pages.append(self._load_and_parse_page(self.site_home, index_page))
+
 		for f in files:
-			filename = join(pages_directory, f)
-			raw_content = self.load_markdown_page(filename)
-
-			page = raw_content
-			page['header'] = yaml.load(page['header'])
-			page['filename'] = f
-			page['filename_free'] = f.split('.')[0]
-
-			self.pages.append(raw_content)
+			filepath = join(pages_directory, f)
+			page = self._load_and_parse_page(f, filepath)
+			self.pages.append(page)
 
 		self.menu_html = self.site_theme.build_menu(self.pages)
+
+	def _load_and_parse_page(self, filename, filepath):
+		page = self.load_markdown_page(filepath)
+
+		page['header'] = yaml.load(page['header'])
+		page['filename'] = filename
+		page['filename_free'] = filename.split('.')[0]
+
+		return page
 
 	def create_template_table(self):
 		self.template_table = {
@@ -64,7 +70,6 @@ class GumbalSite:
 		self.create_menu()
 		self.create_template_table()
 		self._parse_pages()
-		self._parse_index()
 
 	def _parse_pages(self):
 		for p in self.pages:
@@ -85,20 +90,6 @@ class GumbalSite:
 				pfile.close()
 			except IOError:
 				gumbal_info.terminate("Error while creating file: %s" % file_dir)
-
-	def _parse_index(self):
-		file_dir = "%s/index.html" % self.site_build_dir
-		gumbal_info.print_message(" ~> Creating Index file: \n\t%s" % file_dir)
-
-		index_contents = self.site_theme.get_index()
-		index_replaced = self.parse_all_page(index_contents)
-
-		try:
-			index_file = open(file_dir, "w")
-			index_file.write(index_replaced)
-			index_file.close()
-		except IOError:
-			gumbal_info.terminate("Error while creating file: %s" % file_dir)
 
 	def parse_all_page(self, content, page_table={}):
 		reg = re.compile(r"\{%[\s]{0,}gumbal::?([^%}]*)%\}")

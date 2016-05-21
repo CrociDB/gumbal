@@ -26,10 +26,6 @@ class GumbalTheme:
 		self.theme_index = self.theme_obj['theme_index']
 		self.theme_page = self.theme_obj['theme_page']
 
-	def get_index(self):
-		index_filename = "%s/%s" % (self.theme_root_path, self.theme_index)
-		return self.read_file(index_filename)
-
 	def get_page(self):
 		page_filename = "%s/%s" % (self.theme_root_path, self.theme_page)
 		return self.read_file(page_filename)
