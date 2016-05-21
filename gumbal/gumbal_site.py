@@ -3,6 +3,8 @@ import os
 import shutil
 import re
 
+import markdown2
+
 from os.path import isfile, join
 
 import gumbal_info
@@ -48,6 +50,7 @@ class GumbalSite:
 		page = self.load_markdown_page(filepath)
 
 		page['header'] = yaml.load(page['header'])
+		page['content'] = markdown2.markdown(page['content'])
 		page['filename'] = filename
 		page['filename_free'] = filename.split('.')[0]
 

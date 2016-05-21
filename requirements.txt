@@ -2,3 +2,4 @@ PAM>0.1
 Pillow==2.3.0
 PyYAML==3.11
 argparse==1.2.1
+markdown2==2.3.1
