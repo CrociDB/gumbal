@@ -36,7 +36,7 @@ class GumbalParser:
 			gumbal_site = GumbalSite(os.getcwd())
 			gumbal_info.print_message("Current site loaded: %s" % gumbal_site.site_name)
 			gumbal_info.print_message(" ~ Using theme: %s" % gumbal_site.site_theme.theme_name)
-		except Exception:
-			gumbal_info.print_error("Ops, that doesn't look like a real site.")
+		except Exception as e:
+			gumbal_info.print_error("Ops, something went wront. Is this a real site? More info: \n\n\t~> %s" % e)
 
 		return gumbal_site

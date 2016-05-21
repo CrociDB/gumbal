@@ -30,6 +30,10 @@ class GumbalTheme:
 		index_filename = "%s/%s" % (self.theme_root_path, self.theme_index)
 		return self.read_file(index_filename)
 
+	def get_page(self):
+		page_filename = "%s/%s" % (self.theme_root_path, self.theme_page)
+		return self.read_file(page_filename)
+
 	def read_file(self, filename):
 		try:
 			ofile = open(filename)
@@ -40,3 +44,12 @@ class GumbalTheme:
 			gumbal_info.terminate("Couldn't read file at: %s" % filename)
 
 		return contents
+
+	def build_menu(self, pages):
+		menu_items = []
+
+		for p in pages:
+			menu_items.append('<li><a href=/%s.html>%s</a></li>' % (p['filename_free'], p['header']['page_name']))
+
+		menu_html = '<ul>%s</ul>' % ''.join(menu_items)
+		return menu_html
