@@ -1,6 +1,8 @@
 import yaml
 import sys
 
+from os.path import isfile, join
+
 import gumbal_info
 
 class GumbalThemeConstants:
@@ -27,7 +29,7 @@ class GumbalTheme:
 		self.theme_page = self.theme_obj['theme_page']
 
 	def get_page(self):
-		page_filename = "%s/%s" % (self.theme_root_path, self.theme_page)
+		page_filename = join(self.theme_root_path, self.theme_page)
 		return self.read_file(page_filename)
 
 	def read_file(self, filename):
@@ -49,3 +51,5 @@ class GumbalTheme:
 
 		menu_html = '<ul>%s</ul>' % ''.join(menu_items)
 		return menu_html
+
+	def copy_assets(self): pass

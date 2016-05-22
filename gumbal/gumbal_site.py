@@ -30,8 +30,21 @@ class GumbalSite:
 		self.site_home = self.site_obj['site_home']
 		self.site_pages_directory = self.site_obj['site_pages']
 
+	def build(self):
+		if os.path.isdir(self.site_build_dir):
+			shutil.rmtree(self.site_build_dir)
+
+		gumbal_info.print_message("\n")
+		gumbal_info.print_message(" ~> Creating directory: \n\t%s" % self.site_build_dir)
+		os.makedirs(self.site_build_dir)
+
+		self.create_menu()
+		self.create_template_table()
+		self.parse_pages()
+		self.copy_assets()
+
 	def create_menu(self):
-		pages_directory = "%s/%s" % (self.site_root_path, self.site_pages_directory)
+		pages_directory = join(self.site_root_path, self.site_pages_directory)
 		files = [f for f in os.listdir(pages_directory) if isfile(join(pages_directory, f))]
 
 		self.pages = []
@@ -62,19 +75,7 @@ class GumbalSite:
 			GumbalThemeConstants.SITE_MENU: self.menu_html
 		}
 
-	def build(self):
-		if os.path.isdir(self.site_build_dir):
-			shutil.rmtree(self.site_build_dir)
-
-		gumbal_info.print_message("\n")
-		gumbal_info.print_message(" ~> Creating directory: \n\t%s" % self.site_build_dir)
-		os.makedirs(self.site_build_dir)
-
-		self.create_menu()
-		self.create_template_table()
-		self._parse_pages()
-
-	def _parse_pages(self):
+	def parse_pages(self):
 		for p in self.pages:
 			file_dir = "%s/%s.html" % (self.site_build_dir, p['filename_free'])
 			gumbal_info.print_message(" ~> Creating *%s* page: \n\t%s" % (p['header']['page_name'], file_dir))
@@ -107,10 +108,6 @@ class GumbalSite:
 
 		return content
 
-	def _parse_constant_value(self, content, constant, value):
-		rcontent = re.sub(r"\{%%[\s]{0,}gumbal:%s%%\}" % constant, value, content)
-		return rcontent
-
 	def load_markdown_page(self, filename):
 		fcontent = self.read_file(filename)
 		page_data = re.split(r"[\s]{0,}content:[\s]{0,}[\r]{0,}[\n]{1,}[~]{3,}[\s]{0,}[\r]{0,}[\n]{1,}", fcontent, 1)
@@ -121,6 +118,9 @@ class GumbalSite:
 		}
 
 		return retobj
+
+	def copy_assets(self):
+		self.site_theme.copy_assets()
 
 	def read_file(self, filename):
 		try:
