@@ -12,6 +12,13 @@ from gumbal_theme import GumbalTheme
 from gumbal_theme import GumbalThemeConstants
 
 class GumbalSite:
+	@staticmethod
+	def init(gumbal_path, site_path, site_name):
+		shutil.copytree(
+			join(gumbal_path, 'template'),
+			join(site_path, site_name)
+		)
+
 	def __init__(self, path):
 		self.site_root_path = path;
 		self.site_build_dir = "%s/site" % self.site_root_path
